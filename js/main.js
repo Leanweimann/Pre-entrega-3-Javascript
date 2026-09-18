@@ -35,6 +35,7 @@ const hamburguesas = [
 
 console.log("MENU DE HAMBURGUESAS");
 
+
 // FUNCION PARA MOSTRAR EL MENU
 function mostrarMenu(listaHamburguesas) {
 
@@ -46,6 +47,7 @@ function mostrarMenu(listaHamburguesas) {
 
     alert(menu);
 }
+
 
 // FUNCION PARA BUSCAR UNA HAMBURGUESA
 function buscarHamburguesa(id, listaHamburguesas) {
@@ -60,10 +62,12 @@ function buscarHamburguesa(id, listaHamburguesas) {
     return null;
 }
 
+
 // FUNCION PARA CALCULAR EL TOTAL
 function calcularTotal(precio, cantidad) {
     return precio * cantidad;
 }
+
 
 // FUNCION FLECHA PARA VALIDAR LA CANTIDAD
 const validarCantidad = (cantidad) => {
@@ -83,7 +87,10 @@ while (continuar) {
         prompt("Ingresa el numero de la hamburguesa que eliges:")
     );
 
-    let hamburguesaElegida = buscarHamburguesa(opcion, hamburguesas);
+    let hamburguesaElegida = buscarHamburguesa(
+        opcion,
+        hamburguesas
+    );
 
     if (hamburguesaElegida !== null) {
 
