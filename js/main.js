@@ -1,6 +1,4 @@
-
 // MENU DE HAMBURGUESAS
-
 
 const hamburguesas = [
     {
@@ -38,85 +36,97 @@ const hamburguesas = [
 console.log("MENU DE HAMBURGUESAS");
 
 // FUNCION PARA MOSTRAR EL MENU
+function mostrarMenu(listaHamburguesas) {
 
-function mostrarMenu() {
+    let menu = "MENU DE HAMBURGUESAS\n\n";
 
-    let menu = " MENU DE HAMBURGUESAS \n\n";
-
-    for (const hamburguesa of hamburguesas) {
+    for (const hamburguesa of listaHamburguesas) {
         menu += `${hamburguesa.id} - ${hamburguesa.nombre} - $${hamburguesa.precio}\n`;
     }
 
     alert(menu);
-
 }
 
 // FUNCION PARA BUSCAR UNA HAMBURGUESA
+function buscarHamburguesa(id, listaHamburguesas) {
 
-function buscarHamburguesa(id) {
-
-    for (const hamburguesa of hamburguesas) {
+    for (const hamburguesa of listaHamburguesas) {
 
         if (hamburguesa.id === id) {
             return hamburguesa;
         }
-
     }
 
     return null;
-
 }
 
 // FUNCION PARA CALCULAR EL TOTAL
-
 function calcularTotal(precio, cantidad) {
     return precio * cantidad;
+}
+
+// FUNCION FLECHA PARA VALIDAR LA CANTIDAD
+const validarCantidad = (cantidad) => {
+    return cantidad > 0;
 };
 
 
 // PROGRAMA PRINCIPAL
 
-
 let continuar = true;
 
 while (continuar) {
 
-    mostrarMenu();
+    mostrarMenu(hamburguesas);
 
-    let opcion = Number(prompt("Ingresa el numero de la hamburguesa que eliges:"));
+    let opcion = Number(
+        prompt("Ingresa el numero de la hamburguesa que eliges:")
+    );
 
-    let hamburguesaElegida = buscarHamburguesa(opcion);
+    let hamburguesaElegida = buscarHamburguesa(opcion, hamburguesas);
 
     if (hamburguesaElegida !== null) {
 
-        let cantidad = Number(prompt("Cuantas hamburguesas queres?"));
-
-        let total = calcularTotal(hamburguesaElegida.precio, cantidad);
-
-        alert(
-            "Resumen de tu compra\n\n" +
-            "Hamburguesa: " + hamburguesaElegida.nombre +
-            "\nCantidad: " + cantidad +
-            "\nTotal a pagar: $" + total
+        let cantidad = Number(
+            prompt("Cuantas hamburguesas queres?")
         );
 
-        console.log("Pedido realizado:");
-        console.log(hamburguesaElegida);
-        console.log("Cantidad:", cantidad);
-        console.log("Total: $" + total);
+        if (validarCantidad(cantidad)) {
+
+            let total = calcularTotal(
+                hamburguesaElegida.precio,
+                cantidad
+            );
+
+            alert(
+                "Resumen de tu compra\n\n" +
+                "Hamburguesa: " + hamburguesaElegida.nombre +
+                "\nCantidad: " + cantidad +
+                "\nTotal a pagar: $" + total
+            );
+
+            console.log("Pedido realizado:");
+            console.log(hamburguesaElegida);
+            console.log("Cantidad:", cantidad);
+            console.log("Total: $" + total);
+
+        } else {
+
+            alert("La cantidad debe ser mayor a 0.");
+        }
 
     } else {
 
         alert("La hamburguesa ingresada no existe.");
-
     }
 
-    let respuesta = prompt("Queres hacer otro pedido? (si / no)");
+    let respuesta = prompt(
+        "Queres hacer otro pedido? (si / no)"
+    );
 
-    if (respuesta.toLowerCase() !== "si") {
+    if (respuesta === null || respuesta.toLowerCase() !== "si") {
         continuar = false;
     }
-
 }
 
 alert("Gracias por comprar en nuestro local");
